@@ -1,0 +1,34 @@
+<job id="" version="1.0.0">
+    <properties>
+        <property name="" value=""/>
+    </properties>
+
+    <tasks>
+        <task id="start" class="com.github.bjoern2.flow.HelloWorld">
+            <injects>
+                <inject fieldName="name" propertyName="name" type="" />
+            </injects>
+            <ejects>
+                <eject fieldName="greetings" propertyName="greetings" />
+            </ejects>
+            <nexts>
+                <next on="SUCCESS" ref="" />
+            </nexts>
+        </task>
+        
+		<task id="start" class="com.github.bjoern2.flow.HelloWorld">
+            <injects>
+                <inject fieldName="name" propertyName="name" type="" />
+            </injects>
+            <ejects>
+                <eject fieldName="greetings" propertyName="greetings" />
+            </ejects>
+            <nexts>
+                <next on="SUCCESS" ref="" />
+            </nexts>
+        </task>       
+        
+        
+        
+    </tasks>
+</job>
