@@ -2,6 +2,8 @@ package com.github.bjoern2.flow.xml;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -9,6 +11,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 /**
  * Created by bjoern on 09.06.2014.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Task {
 
     private String id;
@@ -67,4 +70,9 @@ public class Task {
     public void setNexts(List<Next> nexts) {
         this.nexts = nexts;
     }
+
+	@Override
+	public String toString() {
+		return "Task [id=" + id + ", clazz=" + clazz + ", injects=" + injects + ", ejects=" + ejects + ", nexts=" + nexts + "]";
+	}
 }

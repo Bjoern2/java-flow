@@ -1,10 +1,13 @@
 package com.github.bjoern2.flow.xml;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * Created by bjoern on 10.06.2014.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Eject {
 
     @XmlAttribute(name = "fieldName")
@@ -28,5 +31,10 @@ public class Eject {
     public void setPropertyName(String propertyName) {
         this.propertyName = propertyName;
     }
+
+	@Override
+	public String toString() {
+		return "Eject [fieldName=" + fieldName + ", propertyName=" + propertyName + "]";
+	}
 
 }

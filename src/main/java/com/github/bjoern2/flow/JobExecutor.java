@@ -1,19 +1,18 @@
 package com.github.bjoern2.flow;
 
-import com.github.bjoern2.flow.tasklet.Tasklet;
-import com.github.bjoern2.flow.xml.Inject;
-import com.github.bjoern2.flow.xml.Job;
-import com.github.bjoern2.flow.xml.Next;
-import com.github.bjoern2.flow.xml.Task;
-import org.apache.commons.beanutils.BeanMap;
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.MethodUtils;
-import org.apache.commons.beanutils.PropertyUtils;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.beanutils.PropertyUtils;
+
+import com.github.bjoern2.flow.tasklet.Tasklet;
+import com.github.bjoern2.flow.xml.Inject;
+import com.github.bjoern2.flow.xml.Job;
+import com.github.bjoern2.flow.xml.Next;
+import com.github.bjoern2.flow.xml.Property;
+import com.github.bjoern2.flow.xml.Task;
 
 /**
  * Created by bjoern on 09.06.2014.
@@ -26,6 +25,10 @@ public class JobExecutor {
 
     public JobExecutor(Job jobDefinition) {
         this.jobDefinition = jobDefinition;
+        
+        for (Property prop : jobDefinition.getProperties()) {
+        	properties.put(prop.getName(), prop.getValue());
+        }
     }
 
     public void start() throws Throwable {
@@ -54,7 +57,7 @@ public class JobExecutor {
         }
 
         for (Next next : task.getNexts()) {
-            if ("SUCCESS".equals(next.getOn())) {
+            if (status.equals(next.getOn())) {
                 Task nextTask = findTask(next.getRef());
                 start(nextTask);
             }
@@ -62,10 +65,17 @@ public class JobExecutor {
     }
 
     private void injectProperties(Tasklet t, Task task) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Method method = t.getClass().getMethod("setProperty", String.class, Object.class);
+        
+    	Method method = null;
+    	try {
+    		method = t.getClass().getMethod("setProperty", String.class, Object.class);
+    	} catch (NoSuchMethodException e) {
+    		method = null;
+    	}
         for (Inject inject : task.getInjects()) {
             try {
-                PropertyUtils.setProperty(t, inject.getFieldName(), properties.get(inject.getPropertyName()));
+            	Object value = properties.get(inject.getPropertyName());
+                PropertyUtils.setProperty(t, inject.getFieldName(), value);
             } catch (Exception e) {
                 if (method != null) {
                     method.invoke(t, inject.getFieldName(), properties.get(inject.getPropertyName()));

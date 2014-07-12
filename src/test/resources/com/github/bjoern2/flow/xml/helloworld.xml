@@ -1,0 +1,16 @@
+<job id="" version="1.0.0">
+    <properties>
+        <property name="message" value="Hallo Welt!"/>
+    </properties>
+
+    <tasks>
+        <task id="start" class="com.github.bjoern2.flow.tasklet.GreetingsTasklet">
+            <injects>
+                <inject fieldName="message" propertyName="message" />
+            </injects>
+            <nexts>
+                <next on="SUCCESS" ref="" />
+            </nexts>
+        </task>
+    </tasks>
+</job>

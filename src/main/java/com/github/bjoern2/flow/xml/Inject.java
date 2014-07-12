@@ -1,11 +1,14 @@
 package com.github.bjoern2.flow.xml;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
 /**
  * Created by bjoern on 10.06.2014.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Inject {
 
     @XmlAttribute(name = "fieldName")
@@ -51,4 +54,9 @@ public class Inject {
     public void setText(String text) {
         this.text = text;
     }
+
+	@Override
+	public String toString() {
+		return "Inject [fieldName=" + fieldName + ", propertyName=" + propertyName + ", value=" + value + ", text=" + text + "]";
+	}
 }

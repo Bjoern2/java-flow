@@ -1,0 +1,54 @@
+<job id="" version="1.0.0">
+    <properties>
+        <property name="" value=""/>
+    </properties>
+    <tasks>
+        <task id="id3" class="com.github.bjoern2.flow.tasklet.ID3Tasklet">
+            <injects>
+                <inject fieldName="source" propertyName="source" />
+            </injects>
+            <ejects>
+                <eject fieldName="artist" propertyName="artist" />
+                <eject fieldName="song" propertyName="song" />
+                <eject fieldName="album" propertyName="album" />
+            </ejects>
+            <nexts>
+                <next on="SUCCESS" ref="filename" />
+            </nexts>
+        </task>
+        <task id="filename" class="com.github.bjoern2.flow.tasklet.GenerateTargetFilename">
+            <injects>
+                <inject fieldName="source" propertyName="source" />
+                <inject fieldName="artist" propertyName="artist" />
+            </injects>
+            <ejects>
+                <eject fieldName="file" propertyName="target" />
+            </ejects>
+            <nexts>
+                <next on="SUCCESS" ref="" />
+            </nexts>
+        </task>
+		<task id="check" class="com.github.bjoern2.flow.tasklet.CopyCheckTasklet">
+            <injects>
+                <inject fieldName="source" propertyName="source" />
+                <inject fieldName="target" propertyName="target" />
+            </injects>
+            <nexts>
+                <next on="SUCCESS" ref="move" />
+            </nexts>
+        </task>
+		<task id="move" class="com.github.bjoern2.flow.tasklet.MoveFileTasklet">
+            <injects>
+                <inject fieldName="source" propertyName="source" />
+                <inject fieldName="target" propertyName="target" />
+                <inject fieldName="overwrite" value="true" />
+            </injects>
+            <nexts>
+                <next on="SUCCESS" ref="" />
+            </nexts>
+        </task>        
+        
+        
+        
+    </tasks>
+</job>
