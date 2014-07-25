@@ -6,7 +6,7 @@ import java.util.Properties;
 
 import com.github.bjoern2.flow.tasklet.Tasklet;
 
-public class TaskImpl<T extends Tasklet> {
+public class TaskImpl<T extends Tasklet> implements Task<T> {
 
 	private String id;
 	private T tasklet;
@@ -15,6 +15,10 @@ public class TaskImpl<T extends Tasklet> {
 	
 	private Map<String, String> nexts = new HashMap<String, String>();
 	
+	/* (non-Javadoc)
+	 * @see com.github.bjoern2.flow.Task#start(java.util.Properties)
+	 */
+	@Override
 	public String start(Properties properties) {
 		if (injector != null) {
 			injector.inject(tasklet, properties);
@@ -33,10 +37,18 @@ public class TaskImpl<T extends Tasklet> {
 		return nexts.get(result);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.bjoern2.flow.Task#getId()
+	 */
+	@Override
 	public String getId() {
 		return id;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.bjoern2.flow.Task#setId(java.lang.String)
+	 */
+	@Override
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -45,6 +57,10 @@ public class TaskImpl<T extends Tasklet> {
 		return tasklet;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.bjoern2.flow.Task#setTasklet(T)
+	 */
+	@Override
 	public void setTasklet(T tasklet) {
 		this.tasklet = tasklet;
 	}
@@ -53,6 +69,10 @@ public class TaskImpl<T extends Tasklet> {
 		return injector;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.bjoern2.flow.Task#setInjector(com.github.bjoern2.flow.PropertyInjector)
+	 */
+	@Override
 	public void setInjector(PropertyInjector<T> injector) {
 		this.injector = injector;
 	}
@@ -61,18 +81,18 @@ public class TaskImpl<T extends Tasklet> {
 		return ejector;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.bjoern2.flow.Task#setEjector(com.github.bjoern2.flow.PropertyEjector)
+	 */
+	@Override
 	public void setEjector(PropertyEjector<T> ejector) {
 		this.ejector = ejector;
 	}
-
-	public Map<String, String> getNexts() {
-		return nexts;
-	}
-
-	public void setNexts(Map<String, String> nexts) {
-		this.nexts = nexts;
-	}
 	
+	/* (non-Javadoc)
+	 * @see com.github.bjoern2.flow.Task#addNext(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public void addNext(String on, String taskId) {
 		nexts.put(on, taskId);
 	}

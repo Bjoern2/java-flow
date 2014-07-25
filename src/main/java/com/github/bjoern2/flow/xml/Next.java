@@ -2,6 +2,7 @@ package com.github.bjoern2.flow.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * Created by bjoern on 16.06.2014.
@@ -9,8 +10,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Next {
 
+	@XmlAttribute
     private String on;
 
+	@XmlAttribute
     private String ref;
 
     public String getOn() {

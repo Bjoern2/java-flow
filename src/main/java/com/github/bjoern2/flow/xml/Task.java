@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Task {
 
+	@XmlAttribute(name = "id")
     private String id;
 
     @XmlAttribute(name = "class")

@@ -1,6 +1,7 @@
 package com.github.bjoern2.flow;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -11,7 +12,7 @@ import com.github.bjoern2.flow.tasklet.Tasklet;
 
 public class GenericInjector implements PropertyInjector<Tasklet> {
 
-	private Map<String, String> mappings;
+	private Map<String, String> mappings = new HashMap<String, String>();
 	
 	@Override
 	public void inject(Tasklet tasklet, Properties properties) {
@@ -37,6 +38,10 @@ public class GenericInjector implements PropertyInjector<Tasklet> {
             }
         }
 		
+	}
+	
+	public void addMapping(String src, String target) {
+		mappings.put(src, target);
 	}
 
 }

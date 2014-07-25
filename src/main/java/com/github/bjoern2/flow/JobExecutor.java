@@ -26,9 +26,9 @@ public class JobExecutor {
     public JobExecutor(Job jobDefinition) {
         this.jobDefinition = jobDefinition;
         
-        for (Property prop : jobDefinition.getProperties()) {
-        	properties.put(prop.getName(), prop.getValue());
-        }
+//        for (Property prop : jobDefinition.getProperties()) {
+//        	properties.put(prop.getName(), prop.getValue());
+//        }
     }
 
     public void start() throws Throwable {

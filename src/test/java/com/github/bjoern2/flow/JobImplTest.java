@@ -12,7 +12,7 @@ import com.github.bjoern2.flow.tasklet.Tasklet;
 
 public class JobImplTest {
 
-	private JobImpl job;
+	private Job job;
 	
 	@Before
 	public void setUp() throws Exception {

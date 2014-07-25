@@ -9,8 +9,16 @@
                 <inject fieldName="message" propertyName="message" />
             </injects>
             <nexts>
-                <next on="SUCCESS" ref="" />
+                <next on="SUCCESS" ref="swing" />
             </nexts>
         </task>
+        <task id="swing" class="com.github.bjoern2.flow.tasklet.MessageBoxTasklet">
+            <injects>
+                <inject fieldName="message" propertyName="message" />
+            </injects>
+            <nexts>
+                <next on="SUCCESS" ref="" />
+            </nexts>
+        </task>      
     </tasks>
 </job>
