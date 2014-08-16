@@ -23,7 +23,7 @@ public class XmlConfigurationLoader {
 			}
 			GenericInjector injector = new GenericInjector();
 			for (Inject xmlInject : xmlTask.getInjects()) {
-				injector.addMapping(xmlInject.getPropertyName(), xmlInject.getFieldName());
+				injector.addMapping(xmlInject.getPropertyRef(), xmlInject.getName());
 			}
 			task.setInjector(injector);
 			

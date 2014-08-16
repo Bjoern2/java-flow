@@ -10,31 +10,27 @@ import javax.xml.bind.annotation.XmlAttribute;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Eject {
 
-    @XmlAttribute(name = "fieldName")
-    private String fieldName;
+    @XmlAttribute(name = "name")
+    private String name;
 
-    @XmlAttribute(name = "propertyName")
-    private String propertyName;
+    @XmlAttribute(name = "propertyRef")
+    private String propertyRef;
 
-    public String getFieldName() {
-        return fieldName;
-    }
-
-    public void setFieldName(String fieldName) {
-        this.fieldName = fieldName;
-    }
-
-    public String getPropertyName() {
-        return propertyName;
-    }
-
-    public void setPropertyName(String propertyName) {
-        this.propertyName = propertyName;
-    }
-
-	@Override
-	public String toString() {
-		return "Eject [fieldName=" + fieldName + ", propertyName=" + propertyName + "]";
+	public String getName() {
+		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPropertyRef() {
+		return propertyRef;
+	}
+
+	public void setPropertyRef(String propertyRef) {
+		this.propertyRef = propertyRef;
+	}
+
 
 }

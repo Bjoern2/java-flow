@@ -11,7 +11,6 @@ import com.github.bjoern2.flow.tasklet.Tasklet;
 import com.github.bjoern2.flow.xml.Inject;
 import com.github.bjoern2.flow.xml.Job;
 import com.github.bjoern2.flow.xml.Next;
-import com.github.bjoern2.flow.xml.Property;
 import com.github.bjoern2.flow.xml.Task;
 
 /**
@@ -66,6 +65,11 @@ public class JobExecutor {
 
     private void injectProperties(Tasklet t, Task task) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         
+    	if (t.getClass().isAssignableFrom(Injectable.class)) {
+    		
+    	}
+    	
+    	
     	Method method = null;
     	try {
     		method = t.getClass().getMethod("setProperty", String.class, Object.class);
@@ -74,11 +78,11 @@ public class JobExecutor {
     	}
         for (Inject inject : task.getInjects()) {
             try {
-            	Object value = properties.get(inject.getPropertyName());
-                PropertyUtils.setProperty(t, inject.getFieldName(), value);
+            	Object value = properties.get(inject.getPropertyRef());
+                PropertyUtils.setProperty(t, inject.getName(), value);
             } catch (Exception e) {
                 if (method != null) {
-                    method.invoke(t, inject.getFieldName(), properties.get(inject.getPropertyName()));
+                    method.invoke(t, inject.getName(), properties.get(inject.getPropertyRef()));
                 }
             }
         }

@@ -3,6 +3,7 @@ package com.github.bjoern2.flow.xml;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * Created by bjoern on 09.06.2014.
@@ -15,6 +16,9 @@ public class Property {
 
     @XmlAttribute
     private String value;
+    
+    @XmlElement(required = false)
+    private Bean bean;
 
 
     public String getName() {
@@ -36,5 +40,13 @@ public class Property {
 	@Override
 	public String toString() {
 		return "Property [name=" + name + ", value=" + value + "]";
+	}
+
+	public Bean getBean() {
+		return bean;
+	}
+
+	public void setBean(Bean bean) {
+		this.bean = bean;
 	}
 }
