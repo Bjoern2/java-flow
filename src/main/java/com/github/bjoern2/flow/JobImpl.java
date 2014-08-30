@@ -15,6 +15,9 @@ public class JobImpl implements Job {
 	@Override
 	public void start(String id) {
 		Task<?> task = tasks.get(id);
+		if (task == null) {
+			throw new RuntimeException("Task with id \"" + id + "\" not found.");
+		}
 		String next = task.start(properties);
 		if (next == null || next.isEmpty()) {
 			return;

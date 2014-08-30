@@ -16,6 +16,7 @@ import com.github.bjoern2.flow.xml.Task;
 /**
  * Created by bjoern on 09.06.2014.
  */
+@Deprecated
 public class JobExecutor {
 
     private Job jobDefinition;
@@ -45,7 +46,7 @@ public class JobExecutor {
         Class<?> c = Class.forName(clazz);
         Tasklet t = (Tasklet)c.newInstance();
 
-        injectProperties(t, task);
+        inject(t, task);
 
         String status;
         try {
@@ -54,6 +55,8 @@ public class JobExecutor {
             status = "EXCEPTION";
             properties.put("exception", e);
         }
+        
+        
 
         for (Next next : task.getNexts()) {
             if (status.equals(next.getOn())) {
@@ -63,29 +66,36 @@ public class JobExecutor {
         }
     }
 
-    private void injectProperties(Tasklet t, Task task) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        
+    private void inject(Tasklet t, Task task) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    	Injectable i = null;
     	if (t.getClass().isAssignableFrom(Injectable.class)) {
-    		
+    		i = (Injectable)t;
     	}
     	
     	
-    	Method method = null;
-    	try {
-    		method = t.getClass().getMethod("setProperty", String.class, Object.class);
-    	} catch (NoSuchMethodException e) {
-    		method = null;
-    	}
+//    	Method method = null;
+//    	try {
+//    		method = t.getClass().getMethod("setProperty", String.class, Object.class);
+//    	} catch (NoSuchMethodException e) {
+//    		method = null;
+//    	}
         for (Inject inject : task.getInjects()) {
+        	Object value = properties.get(inject.getPropertyRef());
+        	
             try {
-            	Object value = properties.get(inject.getPropertyRef());
                 PropertyUtils.setProperty(t, inject.getName(), value);
             } catch (Exception e) {
-                if (method != null) {
-                    method.invoke(t, inject.getName(), properties.get(inject.getPropertyRef()));
-                }
+            	if (i != null) {
+            		i.inject(inject.getName(), value);
+            	} else {
+            		throw new RuntimeException("Can not inject property " + inject.getName());
+            	}
             }
         }
+    }
+    
+    private void eject() {
+    	
     }
 
 

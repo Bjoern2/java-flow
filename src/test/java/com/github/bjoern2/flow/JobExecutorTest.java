@@ -1,7 +1,5 @@
 package com.github.bjoern2.flow;
 
-import static org.junit.Assert.fail;
-
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
@@ -13,7 +11,7 @@ import com.github.bjoern2.flow.xml.XMLReader;
 
 public class JobExecutorTest {
 	
-	private JobExecutor jobExecutor;
+//	private JobExecutor jobExecutor;
 
 	@Before
 	public void setUp() throws Exception {
@@ -28,8 +26,10 @@ public class JobExecutorTest {
 		XMLReader reader = new XMLReader();
 		Job job = reader.read(xml);
 		
-		jobExecutor = new JobExecutor(job);
-		jobExecutor.start();
+		XmlConfigurationLoader l = new XmlConfigurationLoader();
+		com.github.bjoern2.flow.Job j = l.load(job);
+		j.start("start");
+
 		
 	}
 

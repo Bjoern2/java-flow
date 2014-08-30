@@ -1,6 +1,13 @@
 <job id="" version="1.0.0">
     <properties>
-        <property name="" value=""/>
+        <property name="dataSource">
+        	<bean class="javax.sql.DataSource">
+        		<property name="driver" value="org.postgresql.Driver" />
+        		<property name="username" value="root" />
+        		<property name="password" value="password" />
+        		<property name="url" value="jdbc:..." />
+        	</bean>
+        </property>
     </properties>
 
     <tasks>

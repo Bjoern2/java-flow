@@ -1,6 +1,5 @@
 package com.github.bjoern2.flow;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,25 +15,36 @@ public class GenericInjector implements PropertyInjector<Tasklet> {
 	
 	@Override
 	public void inject(Tasklet tasklet, Properties properties) {
-    	Method method = null;
-    	try {
-    		method = tasklet.getClass().getMethod("setProperty", String.class, Object.class);
-    	} catch (NoSuchMethodException e) {
-    		method = null;
+//    	Method method = null;
+//    	try {
+//    		method = tasklet.getClass().getMethod("setProperty", String.class, Object.class);
+//    	} catch (NoSuchMethodException e) {
+//    		method = null;
+//    	}
+    	Injectable i = null;
+    	if (tasklet.getClass().isAssignableFrom(Injectable.class)) {
+    		i = (Injectable)tasklet;
     	}
+    	
         for (Entry<String, String> mapping : mappings.entrySet()) {
         	Object value = properties.get(mapping.getKey());
             try {
             	
                 PropertyUtils.setProperty(tasklet, mapping.getValue(), value);
             } catch (Exception e) {
-                if (method != null) {
-                    try {
-						method.invoke(tasklet, mapping.getKey(), value);
-					} catch (Exception e1) {
-						throw new RuntimeException(e1);
-					}
-                }
+//                if (method != null) {
+//                    try {
+//						method.invoke(tasklet, mapping.getKey(), value);
+//					} catch (Exception e1) {
+//						throw new RuntimeException(e1);
+//					}
+//                }
+            	
+            	if (i != null) {
+            		i.inject(mapping.getValue(), value);
+            	} else {
+            		throw new RuntimeException("Can not inject property " + mapping.getValue());
+            	}
             }
         }
 		
