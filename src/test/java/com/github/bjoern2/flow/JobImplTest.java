@@ -1,14 +1,10 @@
 package com.github.bjoern2.flow;
 
-import static org.junit.Assert.*;
-
 import java.util.Properties;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import com.github.bjoern2.flow.tasklet.GreetingsTasklet;
-import com.github.bjoern2.flow.tasklet.Tasklet;
 
 public class JobImplTest {
 
@@ -46,11 +42,6 @@ public class JobImplTest {
 		job.addTask(task2);
 		
 		
-	}
-
-	@Test
-	public void testStart() {
-		job.start("");
 	}
 
 }

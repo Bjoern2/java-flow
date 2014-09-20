@@ -1,8 +1,9 @@
 package com.github.bjoern2.flow;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import com.github.bjoern2.flow.tasklet.Tasklet;
 
@@ -14,28 +15,6 @@ public class TaskImpl<T extends Tasklet> implements Task<T> {
 	private PropertyEjector<T> ejector;
 	
 	private Map<String, String> nexts = new HashMap<String, String>();
-	
-	/* (non-Javadoc)
-	 * @see com.github.bjoern2.flow.Task#start(java.util.Properties)
-	 */
-	@Override
-	public String start(Properties properties) {
-		if (injector != null) {
-			injector.inject(tasklet, properties);
-		}
-		String result;
-		try {
-			result = tasklet.execute();
-		} catch (Throwable e) {
-			result = "EXCEPTION";
-			properties.put("EXCEPTION", e);
-		}
-		if (ejector != null) {
-			ejector.eject(tasklet, properties);
-		}
-//		nexts.get(result).run();
-		return nexts.get(result);
-	}
 
 	/* (non-Javadoc)
 	 * @see com.github.bjoern2.flow.Task#getId()
@@ -53,7 +32,7 @@ public class TaskImpl<T extends Tasklet> implements Task<T> {
 		this.id = id;
 	}
 
-	public Tasklet getTasklet() {
+	public T getTasklet() {
 		return tasklet;
 	}
 
@@ -77,7 +56,7 @@ public class TaskImpl<T extends Tasklet> implements Task<T> {
 		this.injector = injector;
 	}
 
-	public PropertyEjector<?> getEjector() {
+	public PropertyEjector<T> getEjector() {
 		return ejector;
 	}
 
@@ -96,5 +75,10 @@ public class TaskImpl<T extends Tasklet> implements Task<T> {
 	public void addNext(String on, String taskId) {
 		nexts.put(on, taskId);
 	}
+
+    @Override
+    public List<String> getNexts(String result) {
+        return Arrays.asList(nexts.get(result));
+    }
 	
 }

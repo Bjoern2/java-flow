@@ -23,6 +23,10 @@ public class GenericInjector implements PropertyInjector<Tasklet> {
     		method = null;
     	}
         for (Entry<String, String> mapping : mappings.entrySet()) {
+            if (mapping.getKey() == null) {
+                continue;
+            }
+            
         	Object value = properties.get(mapping.getKey());
             try {
             	

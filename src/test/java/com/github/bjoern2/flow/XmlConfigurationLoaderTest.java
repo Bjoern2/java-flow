@@ -20,7 +20,6 @@ public class XmlConfigurationLoaderTest {
 		
 		XmlConfigurationLoader loader = new XmlConfigurationLoader();
 		com.github.bjoern2.flow.Job j = loader.load(job);
-		j.start("start");
 	}
 
 }

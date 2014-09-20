@@ -1,17 +1,16 @@
 package com.github.bjoern2.flow;
 
+import java.util.List;
 import java.util.Properties;
 
 public interface Job {
 
-	void start(String id);
-
 	void addTask(Task<?> task);
 
-	void clearTasks();
+	List<Task<?>> getTasks();
 
 	void setProperty(String key, Object value);
 	
-	void addProperties(Properties properties);
+	Properties getProperties();
 
 }
