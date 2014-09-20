@@ -9,7 +9,7 @@ public class JobImpl implements Job {
 	private Properties properties = new Properties();
 	//private Map<String, Task<?>> tasks = new HashMap<String, Task<?>>();
 	private List<Task<?>> tasks = new ArrayList<Task<?>>();
-	
+
 	
 	/* (non-Javadoc)
 	 * @see com.github.bjoern2.flow.Job#addTask(com.github.bjoern2.flow.TaskImpl)

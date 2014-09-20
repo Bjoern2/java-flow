@@ -1,12 +1,18 @@
 <job id="" version="1.0.0">
     <properties>
         <property name="message" value="Hallo Welt!"/>
+        <property name="test">
+        	<bean class="java.util.Date">
+        		<property name="year" value="1983" />
+        		<property name="date" value="1" />
+        	</bean>
+        </property>
     </properties>
 
     <tasks>
         <task id="start" class="com.github.bjoern2.flow.tasklet.GreetingsTasklet">
             <injects>
-                <inject fieldName="message" propertyName="message" />
+                <inject name="message" propertyRef="message" />
             </injects>
             <nexts>
                 <next on="SUCCESS" ref="swing" />
@@ -14,7 +20,7 @@
         </task>
         <task id="swing" class="com.github.bjoern2.flow.tasklet.MessageBoxTasklet">
             <injects>
-                <inject fieldName="message" propertyName="message" />
+                <inject name="message" propertyRef="message" />
             </injects>
             <nexts>
                 <next on="SUCCESS" ref="" />
