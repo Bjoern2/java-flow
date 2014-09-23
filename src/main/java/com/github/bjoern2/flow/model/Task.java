@@ -1,8 +1,6 @@
-package com.github.bjoern2.flow;
+package com.github.bjoern2.flow.model;
 
 import java.util.List;
-
-import com.github.bjoern2.flow.tasklet.Tasklet;
 
 public interface Task<T extends Tasklet> {
 
@@ -20,10 +18,9 @@ public interface Task<T extends Tasklet> {
 	
 	PropertyEjector<T> getEjector();
 
-	void addNext(String on, String taskId);
-	
-	List<String> getNexts(String result);
 
+	List<Next> getNexts();
+	
     T getTasklet();
 
 }

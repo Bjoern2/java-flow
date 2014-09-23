@@ -3,6 +3,8 @@ package com.github.bjoern2.flow.tasklet;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import com.github.bjoern2.flow.model.Tasklet;
+
 public class ExecProcessTasklet implements Tasklet {
 
 //    private Logger logger = LoggerFactory.getLogger(ExecProcessTasklet.class);

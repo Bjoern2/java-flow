@@ -8,8 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import com.github.bjoern2.flow.Job;
-import com.github.bjoern2.flow.Task;
+import com.github.bjoern2.flow.model.Job;
+import com.github.bjoern2.flow.model.Task;
 import com.github.bjoern2.flow.utils.JobUtils;
 
 public class DefaultJobRunner implements JobRunner {

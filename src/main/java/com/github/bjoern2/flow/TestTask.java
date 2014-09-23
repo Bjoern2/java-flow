@@ -1,6 +1,6 @@
 package com.github.bjoern2.flow;
 
-import com.github.bjoern2.flow.tasklet.Tasklet;
+import com.github.bjoern2.flow.model.Tasklet;
 
 /**
  * Created by bjoern on 07.06.2014.

@@ -1,4 +1,4 @@
-package com.github.bjoern2.flow;
+package com.github.bjoern2.flow.model;
 
 import java.util.List;
 import java.util.Properties;

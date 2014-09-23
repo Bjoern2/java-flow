@@ -1,4 +1,4 @@
-package com.github.bjoern2.flow;
+package com.github.bjoern2.flow.model;
 
 public interface Injectable {
 

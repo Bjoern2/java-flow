@@ -1,8 +1,6 @@
-package com.github.bjoern2.flow;
+package com.github.bjoern2.flow.model;
 
 import java.util.Properties;
-
-import com.github.bjoern2.flow.tasklet.Tasklet;
 
 public interface PropertyEjector<T extends Tasklet> {
 

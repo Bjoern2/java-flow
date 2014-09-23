@@ -6,6 +6,8 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
 
+import com.github.bjoern2.flow.model.Tasklet;
+
 /**
  * Created by bjoern on 06.07.2014.
  */
@@ -22,7 +24,7 @@ public class CopyCheckTasklet implements Tasklet {
         if (target.exists()) {
             if (checkContent) {
                 if (FileUtils.contentEquals(source, target)) {
-                    final String message = "Ziel-Datei bereits vorhanden. Beide Dateien sind identisch. Überscheiben?";
+                    final String message = "Ziel-Datei bereits vorhanden. Beide Dateien sind identisch. ï¿½berscheiben?";
                     final String title = "";
                     final int optionType = JOptionPane.YES_NO_CANCEL_OPTION;
                     final int messageType = JOptionPane.WARNING_MESSAGE;
@@ -37,7 +39,7 @@ public class CopyCheckTasklet implements Tasklet {
                 }
             }
             
-            final String message = "Ziel-Datei bereits vorhanden. Überschreiben?";
+            final String message = "Ziel-Datei bereits vorhanden. ï¿½berschreiben?";
             final String title = "";
             final int optionType = JOptionPane.YES_NO_CANCEL_OPTION;
             final int messageType = JOptionPane.WARNING_MESSAGE;

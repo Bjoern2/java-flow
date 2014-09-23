@@ -1,4 +1,4 @@
-package com.github.bjoern2.flow.tasklet;
+package com.github.bjoern2.flow.model;
 
 /**
  * Created by bjoern on 07.06.2014.

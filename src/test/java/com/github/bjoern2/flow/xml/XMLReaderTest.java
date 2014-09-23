@@ -1,10 +1,9 @@
 package com.github.bjoern2.flow.xml;
 
-import static org.junit.Assert.fail;
-
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +23,7 @@ public class XMLReaderTest {
 		
 		Job job = reader.read(xml);
 		
-		System.out.println(job);
+		Assert.assertNotNull(job);
 	}
 
 }

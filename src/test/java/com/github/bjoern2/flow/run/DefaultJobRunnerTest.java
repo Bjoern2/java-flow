@@ -1,24 +1,28 @@
 package com.github.bjoern2.flow.run;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
-import com.github.bjoern2.flow.Job;
-import com.github.bjoern2.flow.JobImpl;
-import com.github.bjoern2.flow.PropertyInjector;
-import com.github.bjoern2.flow.TaskImpl;
-import com.github.bjoern2.flow.XmlConfigurationLoader;
+import com.github.bjoern2.flow.loader.XmlConfigurationLoader;
+import com.github.bjoern2.flow.model.Job;
+import com.github.bjoern2.flow.model.JobImpl;
+import com.github.bjoern2.flow.model.Next;
+import com.github.bjoern2.flow.model.NextImpl;
+import com.github.bjoern2.flow.model.PropertyInjector;
+import com.github.bjoern2.flow.model.TaskImpl;
 import com.github.bjoern2.flow.tasklet.GreetingsTasklet;
 import com.github.bjoern2.flow.xml.XMLReader;
 
 public class DefaultJobRunnerTest {
 
     @Test
-    public void test() throws Exception {
+    public void testManual() throws Exception {
         Job job = new JobImpl();
         job.setProperty("message", "Hello GitHub!");
         
@@ -33,7 +37,9 @@ public class DefaultJobRunnerTest {
                 
             }
         });
-        task1.addNext("SUCCESS", "step2");
+        List<Next> nexts = new ArrayList<>();
+        nexts.add(new NextImpl("SUCCESS", "step2"));
+        task1.setNexts(nexts);
         job.addTask(task1);
         
         TaskImpl<GreetingsTasklet> task2 = new TaskImpl<GreetingsTasklet>();
@@ -53,7 +59,7 @@ public class DefaultJobRunnerTest {
     }
     
     @Test
-    public void test2() throws Exception {
+    public void testXml() throws Exception {
         InputStream in = getClass().getResourceAsStream("/com/github/bjoern2/flow/xml/helloworld.xml");
         String xml = IOUtils.toString(in);
         

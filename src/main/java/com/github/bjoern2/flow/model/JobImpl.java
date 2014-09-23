@@ -1,4 +1,4 @@
-package com.github.bjoern2.flow;
+package com.github.bjoern2.flow.model;
 
 import java.util.ArrayList;
 import java.util.List;

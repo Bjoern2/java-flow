@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'checkstyle'
 
 sourceCompatibility = 1.7
 version = '1.0'
@@ -12,5 +13,9 @@ dependencies {
     compile 'commons-beanutils:commons-beanutils:1.9.2'
 	compile 'commons-io:commons-io:2.4'
 	compile 'org.slf4j:slf4j-api:1.7.7'
+	//compile 'org.springframework:spring-jdbc:4.0.6.RELEASE'
+	compile 'org.eclipse.jgit:org.eclipse.jgit:3.4.1.201406201815-r'
+	
+	
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }

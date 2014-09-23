@@ -1,4 +1,4 @@
-package com.github.bjoern2.flow;
+package com.github.bjoern2.flow.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,8 +6,6 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.apache.commons.beanutils.PropertyUtils;
-
-import com.github.bjoern2.flow.tasklet.Tasklet;
 
 public class GenericInjector implements PropertyInjector<Tasklet> {
 

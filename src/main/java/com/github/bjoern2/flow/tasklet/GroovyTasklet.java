@@ -1,6 +1,9 @@
 package com.github.bjoern2.flow.tasklet;
 
 import javax.tools.*;
+
+import com.github.bjoern2.flow.model.Tasklet;
+
 import java.io.File;
 import java.net.URI;
 import java.net.URL;

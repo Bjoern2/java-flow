@@ -1,11 +1,7 @@
-package com.github.bjoern2.flow;
+package com.github.bjoern2.flow.model;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import com.github.bjoern2.flow.tasklet.Tasklet;
 
 public class TaskImpl<T extends Tasklet> implements Task<T> {
 
@@ -14,7 +10,8 @@ public class TaskImpl<T extends Tasklet> implements Task<T> {
 	private PropertyInjector<T> injector;
 	private PropertyEjector<T> ejector;
 	
-	private Map<String, String> nexts = new HashMap<String, String>();
+//	private Map<String, String> nexts = new HashMap<String, String>();
+	private List<Next> nexts = new ArrayList<Next>();
 
 	/* (non-Javadoc)
 	 * @see com.github.bjoern2.flow.Task#getId()
@@ -67,18 +64,14 @@ public class TaskImpl<T extends Tasklet> implements Task<T> {
 	public void setEjector(PropertyEjector<T> ejector) {
 		this.ejector = ejector;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.github.bjoern2.flow.Task#addNext(java.lang.String, java.lang.String)
-	 */
-	@Override
-	public void addNext(String on, String taskId) {
-		nexts.put(on, taskId);
-	}
 
     @Override
-    public List<String> getNexts(String result) {
-        return Arrays.asList(nexts.get(result));
+    public List<Next> getNexts() {
+        return nexts;
+    }
+
+    public void setNexts(List<Next> nexts) {
+        this.nexts = nexts;
     }
 	
 }

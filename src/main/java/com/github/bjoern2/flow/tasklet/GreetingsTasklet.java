@@ -1,5 +1,7 @@
 package com.github.bjoern2.flow.tasklet;
 
+import com.github.bjoern2.flow.model.Tasklet;
+
 public class GreetingsTasklet implements Tasklet {
 
 	private String message = "";

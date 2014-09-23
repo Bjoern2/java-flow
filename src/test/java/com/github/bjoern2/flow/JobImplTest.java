@@ -1,9 +1,17 @@
 package com.github.bjoern2.flow;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.junit.Before;
 
+import com.github.bjoern2.flow.model.Job;
+import com.github.bjoern2.flow.model.JobImpl;
+import com.github.bjoern2.flow.model.Next;
+import com.github.bjoern2.flow.model.NextImpl;
+import com.github.bjoern2.flow.model.PropertyInjector;
+import com.github.bjoern2.flow.model.TaskImpl;
 import com.github.bjoern2.flow.tasklet.GreetingsTasklet;
 
 public class JobImplTest {
@@ -26,7 +34,9 @@ public class JobImplTest {
 				
 			}
 		});
-		task1.addNext("SUCCESS", "step2");
+        List<Next> nexts = new ArrayList<>();
+        nexts.add(new NextImpl("SUCCESS", "step2"));
+        task1.setNexts(nexts);
 		job.addTask(task1);
 		
 		TaskImpl<GreetingsTasklet> task2 = new TaskImpl<GreetingsTasklet>();

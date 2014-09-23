@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import com.github.bjoern2.flow.Job;
-import com.github.bjoern2.flow.Task;
+import com.github.bjoern2.flow.model.Job;
+import com.github.bjoern2.flow.model.Task;
 
 public class JobUtils {
 

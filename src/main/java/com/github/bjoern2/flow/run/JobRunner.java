@@ -3,7 +3,7 @@ package com.github.bjoern2.flow.run;
 import java.util.List;
 import java.util.Properties;
 
-import com.github.bjoern2.flow.Job;
+import com.github.bjoern2.flow.model.Job;
 
 public interface JobRunner {
 

@@ -2,6 +2,8 @@ package com.github.bjoern2.flow.tasklet;
 
 import javax.swing.JOptionPane;
 
+import com.github.bjoern2.flow.model.Tasklet;
+
 public class MessageBoxTasklet implements Tasklet {
 
 	private String message;
