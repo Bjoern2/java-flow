@@ -4,6 +4,7 @@ apply plugin: 'checkstyle'
 
 sourceCompatibility = 1.7
 version = '1.0'
+group = "com.github.bjoern2"
 
 repositories {
     mavenCentral()
@@ -15,7 +16,20 @@ dependencies {
 	compile 'org.slf4j:slf4j-api:1.7.7'
 	//compile 'org.springframework:spring-jdbc:4.0.6.RELEASE'
 	compile 'org.eclipse.jgit:org.eclipse.jgit:3.4.1.201406201815-r'
-	
-	
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
+
+jar {
+	baseName = "java-flow-core"
+}
+
+uploadArchives {
+	repositories {
+		flatDir {
+			//dirs 'repos'
+			dirs 'c:/develop/ivy'
+		}
+       
+    }
+}
+
