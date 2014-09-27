@@ -9,23 +9,28 @@ import org.apache.commons.lang3.SystemUtils;
 
 import com.github.bjoern2.flow.model.Tasklet;
 
-public class MavenTasklet extends AbstractBuildToolTasklet implements Tasklet {
+public class AntTasklet extends AbstractBuildToolTasklet implements Tasklet {
 
 	private String javaHome;
-	private String mavenHome;
+	private String antHome;
 	private String directory;
-	private List<String> goals = new ArrayList<String>();
-
-
+	private List<String> tasks = new ArrayList<String>();
+	private String buildFile;
+	
 	@Override
 	protected List<String> command() {
 		List<String> args = new ArrayList<String>();
 		if (SystemUtils.IS_OS_WINDOWS) {
-			args.add(mavenHome + "/bin/mvn.bat");
+			args.add(antHome + "/bin/ant.bat");
 		} else {
-			args.add(mavenHome + "/bin/mvn");
+			args.add(antHome + "/bin/ant");
 		}
-		args.addAll(goals);
+		args.addAll(tasks);
+		
+		if (buildFile != null) {
+			// --build-file
+			args.add("-f " + buildFile);
+		}
 		return args;
 	}
 	
@@ -33,7 +38,6 @@ public class MavenTasklet extends AbstractBuildToolTasklet implements Tasklet {
 	protected String directory() {
 		return directory;
 	}
-
 
 	@Override
 	protected Map<String, String> environment() {
@@ -45,12 +49,8 @@ public class MavenTasklet extends AbstractBuildToolTasklet implements Tasklet {
 		return env;
 	}
 	
-	public void setGoals(List<String> goals) {
-		this.goals = goals;
-	}
-
-	public void setMavenHome(String mavenHome) {
-		this.mavenHome = mavenHome;
+	public void setTasks(List<String> tasks) {
+		this.tasks = tasks;
 	}
 
 	public void setJavaHome(String javaHome) {
@@ -59,6 +59,14 @@ public class MavenTasklet extends AbstractBuildToolTasklet implements Tasklet {
 
 	public void setDirectory(String directory) {
 		this.directory = directory;
+	}
+
+	public void setAntHome(String antHome) {
+		this.antHome = antHome;
+	}
+
+	public void setBuildFile(String buildFile) {
+		this.buildFile = buildFile;
 	}
 
 }
